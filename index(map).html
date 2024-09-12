@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+  <title>ICMK: ROBOTS</title>
+  <style>
+  
+    .back-button {
+        position: absolute; /* Positions the button relative to its closest positioned ancestor */
+        top: 20px; /* Distance from the top of the map container */
+        right: 30px; /* Distance from the right of the map container */
+        background-color: cyan; /* Background color of the button */
+        border: none;
+        padding: 10px 25px;
+        border-radius: 5px;
+        font-size: 20px;
+        cursor: pointer;
+        z-index: 1000;
+        font-weight: bold;
+    }
+    
+    </style>
+</head>
+<body>
+  <button class="back-button" onclick="window.history.back();">Back</button>
+  <div id="map" style="height: 500px;"></div>
+  <script>
+    // Initialize the map and set its view to Imus
+    var map = L.map('map').setView([14.4296, 120.9367], 14); // Coordinates of Imus with zoom level 14
+
+    // Add a tile layer to the map using OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      minZoom: 12, // Limit the minimum zoom level to keep focus
+    }).addTo(map);
+
+    // Optional: Add markers or other map elements
+    L.marker([14.4296, 120.9367]).addTo(map)
+      .bindPopup('Welcome to Imus!')
+      .openPopup();
+  </script>
+  
+</body>
+</html>

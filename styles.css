@@ -1,0 +1,80 @@
+body {
+    background-image: url(images/imus2.jpg);
+    background-color: gray;
+    background-size: 100%;
+    background-position: center 79px;
+    background-repeat: no-repeat;
+    margin: 0px; /* aalis yung default margin */
+    padding: 0px;
+    height: 100vh;
+    font-family: Arial, sans-serif; /* Set default font for body */
+}
+
+ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    
+    margin: 0 30px; /* Adjust margin for better spacing */
+}
+
+header {
+    display: flex;
+    justify-content: space-between; /* Adjust to space items */
+    align-items: center; /* Center items vertically */
+    padding: 10px 20px;
+    background-color: cyan; 
+}
+
+header a {
+    text-decoration: none; 
+    color: black; /
+}
+
+.left {
+    margin-left: 30px; 
+}
+
+.right {
+    margin-right: 50px;
+    padding: 10px;
+    display: flex;
+    align-items: center; /* Center items vertically */
+}
+
+.tamayo {
+    
+    height: 700px;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 10px;
+    background-color: transparent;
+}
+
+.melis {
+    color: white;
+    background-color: rgb(16, 164, 59);
+    margin-top: 15%;
+    margin-bottom: 55%;
+    margin-right: 3%;
+    font-weight: bold;
+    font-size: 27px;
+    border: none;
+    border-radius: 15px;
+    text-decoration: none; 
+    padding: 10px;
+}
+
+.cabayao {
+    color: rgb(1, 11, 113);
+    margin-top: 10%;
+    margin-bottom: 55%;
+    margin-left: 30px;
+    font-size: 30px;
+    font-weight: 1000;
+}
