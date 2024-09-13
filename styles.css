@@ -8,6 +8,7 @@ body {
     padding: 0px;
     height: 100vh;
     font-family: Arial, sans-serif; /* Set default font for body */
+    overflow: hidden;
 }
 
 ul {
@@ -26,15 +27,17 @@ header {
     justify-content: space-between; /* Adjust to space items */
     align-items: center; /* Center items vertically */
     padding: 10px 20px;
-    background-color: cyan; 
+    background-color: rgb(1, 11, 113); 
+    width: 100%;
 }
 
 header a {
     text-decoration: none; 
-    color: black; /
+    color: white; /
 }
 
 .left {
+    color: white;
     margin-left: 30px; 
 }
 
@@ -46,11 +49,10 @@ header a {
 }
 
 .tamayo {
-    
-    height: 700px;
     display: flex;
     justify-content: space-between; 
-    align-items: center; 
+    align-items: center;
+    margin: 0; 
     padding: 10px;
     background-color: transparent;
 }
