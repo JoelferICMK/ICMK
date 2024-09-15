@@ -87,8 +87,9 @@
     var map = L.map('map').setView([14.3822177736228, 120.936745093856], 15); // Center on school
 
     // Add a tile layer (base map)
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            attribution: '© Esri, © OpenStreetMap contributors',
+            maxZoom: 18
     }).addTo(map);
 
     // Add marker for the school
