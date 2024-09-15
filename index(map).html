@@ -5,14 +5,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
-  <title>ICMK: ROBOTS</title>
-  <style>
-  
-    .back-button {
-        position: absolute; /* Positions the button relative to its closest positioned ancestor */
-        top: 20px; /* Distance from the top of the map container */
-        right: 30px; /* Distance from the right of the map container */
-        background-color: cyan; /* Background color of the button */
+  <title>Interactive Imus City Map</title>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+  crossorigin=""/>
+
+  <!-- Custom Styles -->
+    <style>
+      #map {
+        height: 600px;
+        width: 100%;
+      }
+
+      h1 {
+        color: white;
+        margin-left: 4%;
+        font-size: bold;
+        font-weight: 20px;
+      }
+
+      body {
+        background-color: rgb(17, 133, 50);
+      }
+
+      .search-container {
+        margin: 10px auto;
+        width: 80%;
+        max-width: 600px;
+        background-color: #d3d3d3;
+        padding: 20px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      #search-input {
+        flex: 1;
+        padding: 10px;
+        margin-right: 10px;
+        font-size: 16px;
+      }
+
+      #search-button {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: cyan;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        font-weight: bold;
+      }
+
+      .back-button {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        color: white;
+        background-color: rgb(1, 11, 113);
         border: none;
         padding: 10px 25px;
         border-radius: 5px;
@@ -20,16 +73,33 @@
         cursor: pointer;
         z-index: 1000;
         font-weight: bold;
-    }
+      }
     
     </style>
 </head>
 <body>
+
+  <h1>Interactive Imus City Map with Historical Places</h1>
   <button class="back-button" onclick="window.history.back();">Back</button>
-  <div id="map" style="height: 500px;"></div>
+
+  <div class="search-container">
+    <input type="text" id="search-input" placeholder="Enter a place" />
+    <button id="search-button">Search</button>
+  </div>
+
+  <!-- Map container -->
+  <div id="map"></div>
   <script>
-    // Initialize the map and set its view to Imus
-    var map = L.map('map').setView([14.4296, 120.9367], 14); // Coordinates of Imus with zoom level 14
+
+    // Initialize the map and set its view to Casta
+    const schoolLat = 14.3822;
+    const schoolLon = 120.9367;
+
+    const map = L.map('map').setView([schoolLat, schoolLon], 13);
+
+    L.marker([schoolLat, schoolLon]).addTo(map)
+      .bindPopup('You are currently here')
+      .openPopup();  // Open the pop-up automatically
 
     // Add a tile layer to the map using OpenStreetMap tiles
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -37,15 +107,19 @@
       minZoom: 12, // Limit the minimum zoom level to keep focus
     }).addTo(map);
 
-    // Optional: Add markers or other map elements
-    L.marker([14.4296, 120.9367]).addTo(map)
-      .bindPopup('Welcome to Imus!')
-      .openPopup();
+    const historicalPlaces = [
+      {
+        name: 'Imus Cathedral',
+        lat: 14.4222,
+        lon: 120.9369,
+        trivia: 'Imus Cathedral is a historic church where important religious ceremonies in Cavite have taken place. It played a key role in the Philippine revolution.'
+      },
+    ];
+
+    historicalPlaces.forEach(place => {
+      L.marker([place.lat, place.lon]).addTo(map)
+        .bindPopup(`<b>${place.name}</b><br>${place.trivia}`);
+    });
   </script>
-  
 </body>
-
-    
-
-
 </html>
