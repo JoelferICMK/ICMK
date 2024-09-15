@@ -1,72 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Imus City Map</title>
-
-    <!-- Polyfill for older browsers -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-
-    <!-- Leaflet CSS (Latest Stable Version) -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-    crossorigin=""/>
-
-    <!-- Custom Styles -->
-    <style>
-      #map {
-        height: 600px;
-        width: 100%;
-      }
-
-      h1 {
-        color: white;
-        margin-left: 4%;
-        font-size: bold;
-        font-weight: 20px;
-      }
-
-      body {
-        background-color: rgb(17, 133, 50);
-      }
-
-      .search-container {
-        margin: 10px auto;
-        width: 80%;
-        max-width: 600px;
-        background-color: #d3d3d3;
-        padding: 20px;
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-      }
-
-      #search-input {
-        flex: 1;
-        padding: 10px;
-        margin-right: 10px;
-        font-size: 16px;
-      }
-
-      #search-button {
-        padding: 10px 20px;
-        font-size: 16px;
-        background-color: cyan;
-        border: none;
-        cursor: pointer;
-        border-radius: 5px;
-        font-weight: bold;
-      }
-
-      .back-button {
-        position: absolute;
-        top: 20px;
-        right: 30px;
-        color: white;
-        background-color: rgb(1, 11, 113);
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+  <title>ICMK: ROBOTS</title>
+  <style>
+  
+    .back-button {
+        position: absolute; /* Positions the button relative to its closest positioned ancestor */
+        top: 20px; /* Distance from the top of the map container */
+        right: 30px; /* Distance from the right of the map container */
+        background-color: cyan; /* Background color of the button */
         border: none;
         padding: 10px 25px;
         border-radius: 5px;
@@ -74,128 +20,32 @@
         cursor: pointer;
         z-index: 1000;
         font-weight: bold;
-      }
-
-      /* Fallback message style */
-      #map-error {
-        color: white;
-        text-align: center;
-        display: none; /* Hidden by default */
-      }
+    }
+    
     </style>
 </head>
 <body>
-
-  <h1>Interactive Imus City Map with Historical Places</h1>
-
   <button class="back-button" onclick="window.history.back();">Back</button>
-
-  <!-- Search Box -->
-  <div class="search-container">
-    <input type="text" id="search-input" placeholder="Enter a place" />
-    <button id="search-button">Search</button>
-  </div>
-
-  <!-- Fallback message if map doesn't load -->
-  <p id="map-error">The map could not be loaded. Please check your device or try again later.</p>
-
-  <!-- Map container -->
-  <div id="map"></div>
-
-  <!-- Leaflet JavaScript (Latest Stable Version) -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-    crossorigin="">
-  </script>
-
-  <!-- Custom Script -->
+  <div id="map" style="height: 500px;"></div>
   <script>
-      document.addEventListener('DOMContentLoaded', function() {
-          const mapContainer = document.getElementById('map');
+    // Initialize the map and set its view to Imus
+    var map = L.map('map').setView([14.4296, 120.9367], 14); // Coordinates of Imus with zoom level 14
 
-          if (!mapContainer) {
-              document.getElementById('map-error').style.display = 'block';  // Show error if map container doesn't exist
-              return;
-          }
+    // Add a tile layer to the map using OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      minZoom: 12, // Limit the minimum zoom level to keep focus
+    }).addTo(map);
 
-          // Coordinates for Gen. Juan Castañeda Senior High School
-          const schoolLat = 14.3822;
-          const schoolLon = 120.9367;
-
-          // Initialize the map and set the view
-          const map = L.map('map').setView([schoolLat, schoolLon], 16);
-
-          // Add tiles
-          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-              maxZoom: 19,
-              minZoom: 12,
-          }).addTo(map);
-
-          // Add a marker and pop-up for Gen. Juan Castañeda Senior High School
-          L.marker([schoolLat, schoolLon]).addTo(map)
-            .bindPopup('You are currently here')
-            .openPopup();
-
-          // Add markers for historical places
-          const historicalPlaces = [
-              {
-                  name: 'Imus Cathedral',
-                  lat: 14.4222,
-                  lon: 120.9369,
-                  trivia: 'Imus Cathedral is a historic church where important religious ceremonies in Cavite have taken place.'
-              },
-              {
-                  name: 'Battle of Imus Monument',
-                  lat: 14.4313,
-                  lon: 120.9345,
-                  trivia: 'This monument commemorates the Battle of Imus, an important victory for Filipino revolutionaries.'
-              },
-              {
-                  name: 'Battle of Alapan Marker',
-                  lat: 14.4347,
-                  lon: 120.9392,
-                  trivia: 'The Battle of Alapan is considered the first military victory of Emilio Aguinaldo during the revolution.'
-              }
-          ];
-
-          historicalPlaces.forEach(place => {
-              L.marker([place.lat, place.lon]).addTo(map)
-                .bindPopup(`<b>${place.name}</b><br>${place.trivia}`);
-          });
-
-          // Search functionality (unchanged)
-          document.getElementById('search-button').addEventListener('click', function() {
-              const query = document.getElementById('search-input').value;
-              if (navigator.geolocation) {
-                  navigator.geolocation.getCurrentPosition(function(position) {
-                      const currentLat = position.coords.latitude;
-                      const currentLon = position.coords.longitude;
-
-                      fetch(`https://nominatim.openstreetmap.org/search?q=${query}&format=json`)
-                          .then(response => response.json())
-                          .then(data => {
-                              if (data.length > 0) {
-                                  const { lat, lon } = data[0];
-                                  map.setView([lat, lon], 16);  // Zoom level 16 for a closer view
-                                  L.marker([lat, lon]).addTo(map)
-                                      .bindPopup(` 
-                                          <b>${query}</b><br>
-                                          Located here
-                                      `);
-                              } else {
-                                  alert('No results found.');
-                              }
-                          })
-                          .catch(error => console.error('Error fetching geocoding data:', error));
-                  }, function(error) {
-                      alert('Unable to retrieve your location.');
-                  });
-              } else {
-                  alert('Geolocation is not supported by this browser.');
-              }
-          });
-      });
+    // Optional: Add markers or other map elements
+    L.marker([14.4296, 120.9367]).addTo(map)
+      .bindPopup('Welcome to Imus!')
+      .openPopup();
   </script>
-
+  
 </body>
+
+    
+
+
 </html>
