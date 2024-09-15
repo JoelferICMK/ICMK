@@ -106,10 +106,10 @@
       const map = L.map('map').setView([schoolLat, schoolLon], 16);  // Set zoom level to 16 for a closer view
 
       // Add ESRI basemap tiles
-      L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-            attribution: '© Esri, © OpenStreetMap contributors',
-            maxZoom: 18
-      }).addTo(map);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      minZoom: 12, // Limit the minimum zoom level to keep focus
+    }).addTo(map);
 
       // Add marker and pop-up for Gen. Juan Castañeda Senior High School
       L.marker([schoolLat, schoolLon]).addTo(map)
