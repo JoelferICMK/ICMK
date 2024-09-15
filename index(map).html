@@ -25,7 +25,37 @@
       body {
         background-color: rgb(17, 133, 50);
       }
-      
+
+      .search-container {
+        margin: 10px auto;
+        width: 80%;
+        max-width: 600px;
+        background-color: #d3d3d3;
+        padding: 20px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      #search-input {
+        flex: 1;
+        padding: 10px;
+        margin-right: 10px;
+        font-size: 16px;
+      }
+
+      #search-button {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: cyan;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        font-weight: bold;
+      }
+
       .back-button {
         position: absolute;
         top: 20px;
@@ -45,45 +75,32 @@
 </head>
 <body>
 
+
   <button class="back-button" onclick="window.history.back();">Back</button>
 
-  
-
+ 
   <!-- Map container -->
   <div id="map"></div>
   <script>
+    
+    // Initialize the map
+    var map = L.map('map').setView([14.3822177736228, 120.936745093856], 15); // Center on school
 
-    // Initialize the map and set its view to Casta
-    const schoolLat = 14.3822;
-    const schoolLon = 120.9367;
-
-    const map = L.map('map').setView([schoolLat, schoolLon], 13);
-
-    L.marker([schoolLat, schoolLon]).addTo(map)
-      .bindPopup('You are currently here')
-      .openPopup();  // Open the pop-up automatically
-
-    // Add a tile layer to the map using OpenStreetMap tiles
+    // Add a tile layer (base map)
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      minZoom: 12, // Limit the minimum zoom level to keep focus
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    const historicalPlaces = [
-      {
-        name: 'Imus Cathedral',
-        lat: 14.4222,
-        lon: 120.9369,
-        trivia: 'Imus Cathedral is a historic church where important religious ceremonies in Cavite have taken place. It played a key role in the Philippine revolution.'
-      },
-    ];
+    // Add marker for the school
+    var schoolMarker = L.marker([14.3822177736228, 120.936745093856]).addTo(map);
+    schoolMarker.bindPopup("<b>You are here!</b><br>At Gen. Juan Castaneda SHS.").openPopup();
 
-    historicalPlaces.forEach(place => {
-      L.marker([place.lat, place.lon]).addTo(map)
-        .bindPopup(`<b>${place.name}</b><br>${place.trivia}`);
-    });
+    // Add other places with markers
+    var place1 = L.marker([14.39279160639429, 120.91898458868829]).addTo(map);
+    place1.bindPopup("<b>Sport Center Imus</b><br>Stadium.");
 
-
+    var place2 = L.marker([14.404162878198767, 120.91534214887675]).addTo(map);
+    place2.bindPopup("<b>Dambana ng Imus</b><br>Flag City.");
   </script>
 </body>
 </html>
