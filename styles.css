@@ -1,6 +1,6 @@
 body {
-    background-image: url(Images/FirstPage.jpg.png);
-    background-color: gray;
+    background-image: url(Images/Firstpage.png);
+    background-color: #39bf6b;
     background-size: 100%;
     background-position: center 79px;
     background-repeat: no-repeat;
@@ -8,6 +8,7 @@ body {
     padding: 0px;
     height: 700%;
     font-family: Arial, sans-serif; /* Set default font for body */
+    overflow: hidden;
     
 }
 
@@ -27,7 +28,7 @@ header {
     justify-content: space-between; /* Adjust to space items */
     align-items: center; /* Center items vertically */
     padding: 10px 20px;
-    background-color: rgb(1, 11, 113); 
+    background-color: #121d85; 
     width: 100%;
 }
 
@@ -59,10 +60,10 @@ header a {
 
 .melis {
     color: white;
-    background-color: rgb(24, 153, 61);
-    margin-top: 15%;
-    margin-bottom: 55%;
-    margin-right: 3%;
+    background-color: #2c9754;
+    margin-top: 20%;
+    margin-bottom: 70%;
+    margin-right: 10%;
     font-weight: bold;
     font-size: 27px;
     border: none;
@@ -72,10 +73,10 @@ header a {
 }
 
 .cabayao {
-    color: rgb(1, 11, 113);
-    margin-top: 10%;
-    margin-bottom: 55%;
-    margin-left: 30px;
-    font-size: 30px;
+    color: white;
+    margin-top: 36%;
+    margin-bottom: 50%;
+    margin-left: 40px;
+    font-size: 20px;
     font-weight: bold;
 }
